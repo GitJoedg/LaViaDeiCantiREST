@@ -49,11 +49,19 @@ public class UserService {
         if (userDAO.isPresent()) {
             byte[] hash = PasswordManager.hash(user.getPassword().toCharArray(), userDAO.get().getSalt());
             if(Arrays.equals(hash, userDAO.get().getHash())){
-                userRepository.setUserOnline(username);
+                userRepository.setUserStatus(UserStatus.ONLINE.toString(), username);
                 User result = userDAO.get();
                 result.setUserStatus(UserStatus.ONLINE);
             }
         }
         return null;
+    }
+
+    /**
+     * Set the user to an OFFLINE status
+     * @param username of the user
+     */
+    public void logoutUser(String username){
+        userRepository.setUserStatus(UserStatus.OFFLINE.toString(), username);
     }
 }

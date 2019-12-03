@@ -30,7 +30,7 @@ public class User {
     private byte[] hash;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private UserStatus userStatus = UserStatus.OFFLINE;
+    private UserStatus userStatus;
     @Transient
     private String password;
 

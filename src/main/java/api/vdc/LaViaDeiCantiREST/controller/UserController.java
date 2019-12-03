@@ -12,7 +12,6 @@ import java.util.Optional;
 @RestController
 public class UserController {
     private final UserService userService;
-
     /**
      * Constructor of UserController class.
      * @param userService autowired from Spring
@@ -39,5 +38,13 @@ public class UserController {
     @PostMapping("/validateUser")
     public User validateUser(@RequestBody User user) {
       return userService.validateUser(user);
+    }
+    /**
+     * Logout of user
+     * @param username of the user
+     */
+    @GetMapping("/logoutUser/{username}")
+    public void logoutUser(@PathVariable String username){
+        userService.logoutUser(username);
     }
 }
