@@ -29,13 +29,15 @@ public class UserService {
      * Then, encrypt his password with salt and hash technique and save into DB
      * @param user the user that will be saved in DB
      */
-    public void saveUser(@RequestBody User user){
+    public String saveUser(@RequestBody User user){
         byte [] salt = PasswordManager.getNextSalt(); //PasswordManager.getNextSalt();
         System.out.println(user.getPassword().toCharArray());
         byte[] hash = PasswordManager.hash(user.getPassword().toCharArray(), salt);
         user.setSalt(salt);
         user.setHash(hash);
         userRepository.save(user);
+        userRepository.setUserStatus("OFFLINE", user.getUsername());
+        return "{}";
     }
     /**
      * This method validate the User passed in input by retrieving his salt and hash from DB,
@@ -52,6 +54,7 @@ public class UserService {
                 userRepository.setUserStatus(UserStatus.ONLINE.toString(), username);
                 User result = userDAO.get();
                 result.setUserStatus(UserStatus.ONLINE);
+                return result;
             }
         }
         return null;

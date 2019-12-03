@@ -20,16 +20,14 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
     /**
      * This method take in input an user passed by POST Method in Json.
      * @param user the user that will be saved in DB
      */
     @PostMapping("/saveUser")
-    public void saveUser(@RequestBody User user){
-        userService.saveUser(user);
+    public String saveUser(@RequestBody User user){
+        return userService.saveUser(user);
     }
-
     /**
      * Validate the user password and return the user logged.
      * @param user who needs to be validated
