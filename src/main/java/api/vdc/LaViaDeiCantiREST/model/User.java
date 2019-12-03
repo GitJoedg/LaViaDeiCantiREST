@@ -1,5 +1,6 @@
 package api.vdc.LaViaDeiCantiREST.model;
 
+import api.vdc.LaViaDeiCantiREST.utils.UserStatus;
 import api.vdc.LaViaDeiCantiREST.utils.UserType;
 
 import javax.persistence.*;
@@ -27,10 +28,22 @@ public class User {
     private byte[] salt;
     @Column(name = "hash")
     private byte[] hash;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private UserStatus userStatus = UserStatus.OFFLINE;
     @Transient
     private String password;
 
     //Getters & Setters
+
+
+    public UserStatus getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
+    }
 
     public String getPassword() {
         return password;
