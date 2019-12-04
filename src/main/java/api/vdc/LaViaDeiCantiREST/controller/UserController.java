@@ -1,23 +1,19 @@
 package api.vdc.LaViaDeiCantiREST.controller;
 
 import api.vdc.LaViaDeiCantiREST.model.User;
-import api.vdc.LaViaDeiCantiREST.service.UserService;
-import api.vdc.LaViaDeiCantiREST.utils.PasswordManager;
+import api.vdc.LaViaDeiCantiREST.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Optional;
-
 @RestController
 public class UserController {
-    private final UserService userService;
+    private final UserServiceImpl userService;
     /**
      * Constructor of UserController class.
      * @param userService autowired from Spring
      */
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
     /**
